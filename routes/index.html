@@ -1,0 +1,29 @@
+<script src="https://static.vouched.id/widget/vouched.js"></script>
+<script type='text/javascript'>
+    (function(){
+        var vouched = Vouched({
+            // your public key
+            appId: 'P#mh_rFrHERaT!slSg!RV8ttVjT1O@',
+            types: ['id-verification'],
+            // needed if theres a customer service claim when
+            // the user disagree with the results
+            callbackURL: 'https://www.google.com',
+            theme: {
+                baseColor: '#FD814B',
+                bgColor: '#000'
+            },
+            onInit: () => {
+                console.log('Scanning started');
+            },
+            onDone: (job)=> {
+                // notify a server process that a job is complete
+                // query the job with the token
+                fetch(`/api/idv?job_token=${job.token}`);
+            }
+        })
+        vouched.mount('#vouched-element')
+    })();
+</script>
+<body>
+<div id='vouched-element' style="height: 100%"/>
+</body>
